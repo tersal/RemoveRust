@@ -16,7 +16,7 @@ int main(int argc, char** argv)
 	int operation;
 	float x;
 	float y;
-	
+
 	do {
 		std::cout << std::endl << std::endl;
 		std::cout << "List of available operations:" << std::endl;
@@ -30,8 +30,8 @@ int main(int argc, char** argv)
 		std::cout << "Add first element of the operation: " << std::endl;
 		std::cin >> x;
 		std::cout << "Add second element of the operation: " << std::endl;
-		srd::cin >> y;
-		
+		std::cin >> y;
+
 		switch(operation) {
 			case ADD_OPERATION:
 				std::cout << "Total is: " << x + y << std::endl;
