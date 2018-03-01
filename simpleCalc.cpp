@@ -4,18 +4,21 @@
 #include <iostream>
 
 // Just some defines to avoid using magic numbers
-#define EXIT_PROGRAM      0x05  // Used to end the operation of this program
-#define ADD_OPERATION     0x01
-#define MINUS_OPERATION   0x02
-#define MULT_OPERATION    0x03
-#define DIV_OPERATION     0x04
-
+enum Operation {
+	ADD_OPERATION = 1,
+	MINUS_OPERATION,
+	MULT_OPERATION,
+	DIV_OPERATION,
+	EXIT_PROGRAM  // Last element just to try to keep some order in the code
+};
 
 int main(int argc, char** argv)
 {
-	int operation;
+	int lecture;
 	float x;
 	float y;
+	float result;
+	Operation operation;
 
 	do {
 		std::cout << std::endl << std::endl;
@@ -26,24 +29,30 @@ int main(int argc, char** argv)
 		std::cout << "4.- Division" << std::endl;
 		std::cout << "5.- Leave program" << std::endl;
 		std::cout << "Please select an operation from the list: ";
-		std::cin >> operation;
-		std::cout << "Add first element of the operation: " << std::endl;
-		std::cin >> x;
-		std::cout << "Add second element of the operation: " << std::endl;
-		std::cin >> y;
+		std::cin >> lecture;
+		
+		operation = static_cast<Operation>(lecture);
+		
+		
+		if(operation != EXIT_PROGRAM) {
+			std::cout << "Add first element of the operation: " << std::endl;
+			std::cin >> x;
+			std::cout << "Add second element of the operation: " << std::endl;
+			std::cin >> y;
+		}
 
 		switch(operation) {
 			case ADD_OPERATION:
-				std::cout << "Total is: " << x + y << std::endl;
+				result = x + y;
 				break;
 			case MINUS_OPERATION:
-				std::cout  << "Total is: " << x - y << std::endl;
+				result = x - y;
 				break;
 			case MULT_OPERATION:
-				// Fill with functionality
+				result = x * y;
 				break;
 			case DIV_OPERATION:
-				// Fill with functionality
+				result = x / y;
 				break;
 			case EXIT_PROGRAM:
 				std::cout << "Thanks for testing this thing." << std::endl;
@@ -52,6 +61,11 @@ int main(int argc, char** argv)
 				std::cout << "I think that I can't do that, yet" << std::endl;
 				break;
 		}
+		
+		if(operation != EXIT_PROGRAM) {	
+			std::cout << "Total is: " << result << std::endl;
+		}
+		
 	}while(operation != EXIT_PROGRAM);	
 	return 0;
 }
